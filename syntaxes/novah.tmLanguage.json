@@ -8,7 +8,7 @@
 		{
 			"name": "meta.declaration.module.novah",
 			"begin": "^\\s*(module)\\b",
-			"end": "\\n",
+			"end": "($|(?=//))",
 			"captures": {
 				"1": { "name": "keyword.other.novah" }
 			},
@@ -31,9 +31,13 @@
 			},
 			"patterns": [
 				{
-					"match": "\\b(as)\\b",
+					"include": "#module_imports"
+				},
+				{
+					"match": "\\b(as)\\s+([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*)",
 					"captures": {
-						"1": { "name": "keyword.other.novah" }
+						"1": { "name": "keyword.other.novah" },
+						"2": { "name": "entity.name.type.novah" }
 					}
 				},
 				{
@@ -42,9 +46,43 @@
 			]
 		},
 		{
-			"name": "meta.foreign.type.novah",
-			"begin": "^(\\s*)(foreign)\\s+(import)\\s+(type)\\b",
-			"end": "^(?!\\1[ \\t]|[ \\t]*$)",
+			"name": "meta.foreign.getset.novah",
+			"begin": "^(\\s*)(foreign)\\s+(import)\\s+(get|set)\\b",
+			"end": "($|(?=//))",
+			"beginCaptures": {
+        "2": {
+          "name": "keyword.other.novah"
+        },
+        "3": {
+          "name": "keyword.other.novah"
+        },
+        "4": {
+          "name": "keyword.other.novah"
+        }
+      },
+			"patterns": [
+				{
+					"include": "#type_name"
+				},
+				{
+					"match": "\\b(as)\\s+([\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*)",
+					"captures": {
+						"1": { "name": "keyword.other.novah" },
+						"2": { "name": "entity.name.function.novah" }
+					}
+				},
+				{
+					"include": "#module_name"
+				},
+				{
+					"include": "#colon"
+				}
+			]
+		},
+		{
+			"name": "meta.foreign.typenew.novah",
+			"begin": "^(\\s*)(foreign)\\s+(import)\\s+(type|new)\\b",
+			"end": "($|(?=//))",
 			"beginCaptures": {
         "2": {
           "name": "keyword.other.novah"
@@ -73,27 +111,67 @@
 			]
 		},
 		{
+			"name": "meta.foreign.method.novah",
+			"begin": "^(\\s*)(foreign)\\s+(import)\\b",
+			"end": "($|(?=//))",
+			"beginCaptures": {
+        "2": {
+          "name": "keyword.other.novah"
+        },
+        "3": {
+          "name": "keyword.other.novah"
+        }
+      },
+			"patterns": [
+				{
+					"include": "#type_name"
+				},
+				{
+					"match": "\\b(as)\\s+([\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*)",
+					"captures": {
+						"1": { "name": "keyword.other.novah" },
+						"2": { "name": "entity.name.function.novah" }
+					}
+				},
+				{
+					"include": "#module_name"
+				}
+			]
+		},
+		{
 			"include": "#comments"
 		},
 		{
-      "name": "constant.language.boolean.purescript",
+      "name": "constant.language.boolean.novah",
       "match": "\\b(true|false)\\b"
-    }
+    },
+		{
+      "name": "keyword.other.novah",
+      "match": "\\b(foreign|import|type|typealias|opaque)(?!')\\b"
+    }		
 	],
 	"repository": {
 		"module_name": {
       "patterns": [
         {
           "name": "support.other.module.novah",
-          "match": "(?:[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*(?:\\.[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*)*\\.)*[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*(?:\\.[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*)*\\.?"
+          "match": "(?:[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*(?:\\.[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)*\\.)*[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*(?:\\.[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)*\\.?"
         }
       ]
     },
+		"colon": {
+			"patterns": [
+				{
+					"name": "keyword.other.colon.novah",
+					"match": "(?::)"
+				}
+			]
+		},
 		"type_name": {
       "patterns": [
         {
           "name": "entity.name.type.novah",
-          "match": "\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*)*"
+          "match": "\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)*"
         }
       ]
     },
@@ -135,6 +213,46 @@
 					"name": "string.quoted.tripple.novah",
 					"begin": "\"\"\"",
 					"end": "\"\"\""
+				}
+			]
+		},
+		"infix_op": {
+			"patterns": [
+				{
+					"name": "entity.name.function.infix.novah",
+					"match": "(?:\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_\"']]+\\))"
+				}
+			]
+		},
+		"module_imports": {
+			"patterns": [
+				{
+					"name": "meta.declaration.imports.novah",
+					"begin": "\\(",
+					"end": "\\)",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"name": "entity.name.function.novah",
+							"match": "\\b(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*"
+						},
+						{
+							"include": "#type_name"
+						},
+						{
+							"name": "punctuation.separator.comma.novah",
+							"match": ","
+						},
+						{
+							"include": "#infix_op"
+						},
+						{
+							"name": "meta.other.constructor-list.novah",
+							"match": "\\(.*?\\)"
+						}
+					]
 				}
 			]
 		}
