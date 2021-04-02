@@ -20,6 +20,12 @@
             "language": "novah",
             "scopeName": "source.novah",
             "path": "./syntaxes/novah.tmLanguage.json"
-        }]
+        }],
+        "snippets": [
+            {
+                "language": "novah",
+                "path": "./snippets/novah.json"
+            }
+        ]
     }
 }

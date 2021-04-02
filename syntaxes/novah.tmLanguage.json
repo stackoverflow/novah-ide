@@ -309,7 +309,7 @@
 		},
 		{
 			"name": "keyword.other.novah",
-			"match": "\\b(foreign|import|type|typealias|opaque)(?!')\\b"
+			"match": "\\b(foreign|import|type|typealias|opaque|pub\\+|pub|instance)(?!')\\b"
 		},
 		{
       "name": "keyword.control.novah",
@@ -394,14 +394,18 @@
       ]
     },
 		{
-      "name": "keyword.operator.novah",
-      "match": "[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_\"]]+"
-    },
-		{
       "include": "#data_ctor"
     },
 		{
       "include": "#comments"
+    },
+		{
+      "name": "keyword.other.arrow.novah",
+      "match": "\\-\\>"
+    },
+		{
+      "name": "keyword.operator.novah",
+      "match": "[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_\"]]+"
     },
 		{
       "name": "punctuation.separator.comma.novah",

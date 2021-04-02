@@ -1,0 +1,50 @@
+{
+  "Case": {
+    "prefix": "case",
+    "body": "case ${1:expression} of\n  ${2:pattern} -> ${3:expression}"
+  },
+  "Do": {
+    "prefix": "do",
+    "body": "do\n  "
+  },
+  "Foreign": {
+    "prefix": "foreign",
+    "body": "foreign import"
+  },
+  "If": {
+    "prefix": "if",
+    "body": "if ${1:condition} then ${2:branch} else ${3:branch}"
+  },
+  "Import": {
+    "prefix": "import",
+    "body": "import ${1:novah}"
+  },
+  "Let": {
+    "prefix": "let",
+    "body": "let ${1:binding} = ${2:expression}"
+  },
+  "Module": {
+    "prefix": "module",
+    "body": "module ${1:main}"
+  },
+  "Opaque": {
+    "prefix": "opaque",
+    "body": "opaque type ${1:Name} = ${2:Type}"
+  },
+  "Typealias": {
+    "prefix": "typealias",
+    "body": "typealias ${1:Name} = ${2:Type}"
+  },
+  "Type": {
+    "prefix": "type",
+    "body": "type ${1:Name} = ${2:Type}"
+  },
+  "Public": {
+    "prefix": "pub",
+    "body": "pub\n${1:function} = ${2:body}"
+  },
+  "Public Instance": {
+    "prefix": "pub instance",
+    "body": "pub instance\n${1:function} = ${2:body}"
+  }
+}
