@@ -1,0 +1,143 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"fileTypes": [
+		"novah"
+	],
+	"name": "Novah",
+	"patterns": [
+		{
+			"name": "meta.declaration.module.novah",
+			"begin": "^\\s*(module)\\b",
+			"end": "\\n",
+			"captures": {
+				"1": { "name": "keyword.other.novah" }
+			},
+			"patterns": [
+				{
+					"include": "#module_name"
+				},
+				{
+					"name": "invalid.novah",
+					"match": "[A-Z]+"
+				}
+			]
+		},
+		{
+			"name": "meta.import.novah",
+			"begin": "^\\s*(import)\\b",
+			"end": "($|(?=//))",
+			"beginCaptures": {
+				"1": { "name": "keyword.other.novah" }
+			},
+			"patterns": [
+				{
+					"match": "\\b(as)\\b",
+					"captures": {
+						"1": { "name": "keyword.other.novah" }
+					}
+				},
+				{
+					"include": "#module_name"
+				}
+			]
+		},
+		{
+			"name": "meta.foreign.type.novah",
+			"begin": "^(\\s*)(foreign)\\s+(import)\\s+(type)\\b",
+			"end": "^(?!\\1[ \\t]|[ \\t]*$)",
+			"beginCaptures": {
+        "2": {
+          "name": "keyword.other.novah"
+        },
+        "3": {
+          "name": "keyword.other.novah"
+        },
+        "4": {
+          "name": "keyword.other.novah"
+        }
+      },
+			"patterns": [
+				{
+					"include": "#type_name"
+				},
+				{
+					"match": "\\b(as)\\s+([\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*)",
+					"captures": {
+						"1": { "name": "keyword.other.novah" },
+						"2": { "name": "entity.name.function.novah" }
+					}
+				},
+				{
+					"include": "#module_name"
+				}
+			]
+		},
+		{
+			"include": "#comments"
+		},
+		{
+      "name": "constant.language.boolean.purescript",
+      "match": "\\b(true|false)\\b"
+    }
+	],
+	"repository": {
+		"module_name": {
+      "patterns": [
+        {
+          "name": "support.other.module.novah",
+          "match": "(?:[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*(?:\\.[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*)*\\.)*[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*(?:\\.[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*)*\\.?"
+        }
+      ]
+    },
+		"type_name": {
+      "patterns": [
+        {
+          "name": "entity.name.type.novah",
+          "match": "\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*)*"
+        }
+      ]
+    },
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.novah",
+					"match": "\\b(if|then|else|case|of)\\b"
+				},
+				{
+					"name": "keyword.other.novah",
+					"match": "\\b(foreign)\\b"
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.double-slash",
+					"begin": "(^[ \t]+)?(?=//)",
+					"end": "(?!\\G)"
+				}
+			]
+		},
+		"strings": {
+			"patterns": [
+				{
+					"name": "string.quoted.double.novah",
+					"begin": "\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"name": "constant.character.escape.novah",
+							"match": "\\\\."
+						}
+					]
+				},
+				{
+					"name": "string.quoted.tripple.novah",
+					"begin": "\"\"\"",
+					"end": "\"\"\""
+				}
+			]
+		}
+	},
+	"scopeName": "source.novah"
+}

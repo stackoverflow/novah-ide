@@ -1,0 +1,25 @@
+{
+    "name": "novah-ide",
+    "displayName": "Novah IDE",
+    "description": "Integrated development environment for the Novah language",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.55.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "novah",
+            "aliases": ["Novah", "novah"],
+            "extensions": [".novah"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "novah",
+            "scopeName": "source.novah",
+            "path": "./syntaxes/novah.tmLanguage.json"
+        }]
+    }
+}
