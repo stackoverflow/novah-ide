@@ -310,7 +310,83 @@
 		{
 			"name": "keyword.other.novah",
 			"match": "\\b(foreign|import|type|typealias|opaque)(?!')\\b"
-		}
+		},
+		{
+      "name": "keyword.control.novah",
+      "match": "\\b(do|if|then|else|case|of|let|in)(?!')\\b"
+    },
+		{
+      "name": "constant.numeric.hex.novah",
+      "match": "\\b(?<!\\$)0(x|X)[0-9a-fA-F]+[L]?\\b(?!\\$)"
+    },
+		{
+      "name": "constant.numeric.bin.novah",
+      "match": "\\b(?<!\\$)0(b|B)[0-1]+[L]?\\b(?!\\$)"
+    },
+		{
+      "name": "constant.numeric.int.novah",
+      "match": "\\b(?<!\\$)[0-9]+[L]?\\b(?!\\$)"
+    },
+		{
+      "name": "constant.numeric.novah",
+      "match": "\\b[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?[F]?\\b"
+    },
+		{
+      "name": "string.quoted.triple.novah",
+      "begin": "\"\"\"",
+      "end": "\"\"\"",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.novah"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.novah"
+        }
+      }
+    },
+		{
+			"name": "string.quoted.double.novah",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.novah",
+					"match": "\\\\."
+				}
+			]
+		},
+		{
+			"name": "string.quoted.double.novah",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.novah",
+					"match": "\\\\."
+				}
+			]
+		},
+		{
+      "name": "string.quoted.single.novah",
+      "match": "(')((?:[ -\\[\\]-~]|(\\\\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\\\\\"'\\&]))|(\\\\o[0-7]+)|(\\\\u[0-9A-Fa-f]+)|(\\^[A-Z@\\[\\]\\\\\\^_])))(')",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.string.begin.novah"
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#characters"
+            }
+          ]
+        },
+        "7": {
+          "name": "punctuation.definition.string.end.novah"
+        }
+      }
+    }
 	],
 	"repository": {
 		"module_name": {
@@ -352,32 +428,33 @@
 		"comments": {
 			"patterns": [
 				{
-					"name": "comment.line.double-slash",
+					"name": "comment.line.double-slash.novah",
 					"begin": "(^[ \t]+)?(?=//)",
 					"end": "(?!\\G)"
 				}
 			]
 		},
-		"strings": {
-			"patterns": [
-				{
-					"name": "string.quoted.double.novah",
-					"begin": "\"",
-					"end": "\"",
-					"patterns": [
-						{
-							"name": "constant.character.escape.novah",
-							"match": "\\\\."
-						}
-					]
-				},
-				{
-					"name": "string.quoted.tripple.novah",
-					"begin": "\"\"\"",
-					"end": "\"\"\""
-				}
-			]
-		},
+		"characters": {
+      "patterns": [
+        {
+          "match": "(?:[ -\\[\\]-~]|(\\\\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\\\\\"'\\&]))|(\\\\o[0-7]+)|(\\\\u[0-9A-Fa-f]+)|(\\^[A-Z@\\[\\]\\\\\\^_]))",
+          "captures": {
+            "1": {
+              "name": "constant.character.escape.novah"
+            },
+            "2": {
+              "name": "constant.character.escape.octal.novah"
+            },
+            "3": {
+              "name": "constant.character.escape.hexadecimal.novah"
+            },
+            "4": {
+              "name": "constant.character.escape.control.novah"
+            }
+          }
+        }
+      ]
+    },
 		"infix_op": {
 			"patterns": [
 				{
