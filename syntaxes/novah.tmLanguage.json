@@ -358,17 +358,6 @@
 			]
 		},
 		{
-			"name": "string.quoted.double.novah",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"name": "constant.character.escape.novah",
-					"match": "\\\\."
-				}
-			]
-		},
-		{
       "name": "string.quoted.single.novah",
       "match": "(')((?:[ -\\[\\]-~]|(\\\\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\\\\\"'\\&]))|(\\\\o[0-7]+)|(\\\\u[0-9A-Fa-f]+)|(\\^[A-Z@\\[\\]\\\\\\^_])))(')",
       "captures": {
@@ -389,6 +378,34 @@
     },
 		{
       "include": "#function_type_declaration"
+    },
+		{
+      "begin": "^(\\s*)(?:(:))",
+      "beginCaptures": {
+        "2": {
+          "name": "keyword.other.colon.novah"
+        }
+      },
+      "end": "^(?!\\1[ \\t]*|[ \\t]*$)",
+      "patterns": [
+        {
+          "include": "#type_signature"
+        }
+      ]
+    },
+		{
+      "name": "keyword.operator.novah",
+      "match": "[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_\"]]+"
+    },
+		{
+      "include": "#data_ctor"
+    },
+		{
+      "include": "#comments"
+    },
+		{
+      "name": "punctuation.separator.comma.novah",
+      "match": ","
     }
 	],
 	"repository": {
@@ -431,12 +448,61 @@
 		"comments": {
 			"patterns": [
 				{
-					"name": "comment.line.double-slash.novah",
-					"begin": "(^[ \t]+)?(?=//)",
-					"end": "(?!\\G)"
+					"name": "comment.line.double-dash.novah",
+					"begin": "//",
+					"end": "\\n",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.novah"
+						}
+					}
+				},
+				{
+					"include": "#block_comment"
 				}
 			]
 		},
+		"block_comment": {
+      "patterns": [
+				{
+          "name": "comment.block.documentation.novah",
+          "begin": "/\\*\\*",
+          "end": "\\*/",
+          "applyEndPatternLast": 1,
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.documentation.novah"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.documentation.novah"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#block_comment"
+            }
+          ]
+        },
+        {
+          "name": "comment.block.novah",
+          "begin": "/\\*",
+          "end": "\\*/",
+          "applyEndPatternLast": 1,
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.novah"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#block_comment"
+            }
+          ]
+        }
+      ]
+    },
 		"characters": {
       "patterns": [
         {
