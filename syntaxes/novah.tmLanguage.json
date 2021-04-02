@@ -386,6 +386,9 @@
           "name": "punctuation.definition.string.end.novah"
         }
       }
+    },
+		{
+      "include": "#function_type_declaration"
     }
 	],
 	"repository": {
@@ -463,6 +466,32 @@
 				}
 			]
 		},
+		"function_type_declaration": {
+      "patterns": [
+        {
+          "name": "meta.function.type-declaration.novah",
+          "begin": "^(\\s*)([\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)\\s*(?:(:)(?!.*<-))",
+          "end": "^(?!\\1[ \\t]|[ \\t]*$)",
+          "contentName": "meta.type-signature.novah",
+          "beginCaptures": {
+            "2": {
+              "name": "entity.name.function.novah"
+            },
+            "3": {
+              "name": "keyword.other.colon.novah"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#colon"
+            },
+            {
+              "include": "#type_signature"
+            }
+          ]
+        }
+      ]
+    },
 		"type_name": {
 			"patterns": [
 				{
