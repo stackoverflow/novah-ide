@@ -8,9 +8,11 @@
 		{
 			"name": "meta.declaration.module.novah",
 			"begin": "^\\s*(module)\\b",
-			"end": "($|(?=//))",
+			"end": "^(?!\\1[ \\t]|[ \\t]*$)",
 			"captures": {
-				"1": { "name": "keyword.other.novah" }
+				"1": {
+					"name": "keyword.other.novah"
+				}
 			},
 			"patterns": [
 				{
@@ -27,7 +29,9 @@
 			"begin": "^\\s*(import)\\b",
 			"end": "($|(?=//))",
 			"beginCaptures": {
-				"1": { "name": "keyword.other.novah" }
+				"1": {
+					"name": "keyword.other.novah"
+				}
 			},
 			"patterns": [
 				{
@@ -36,30 +40,37 @@
 				{
 					"match": "\\b(as)\\s+([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*)",
 					"captures": {
-						"1": { "name": "keyword.other.novah" },
-						"2": { "name": "entity.name.type.novah" }
+						"1": {
+							"name": "keyword.other.novah"
+						},
+						"2": {
+							"name": "entity.name.type.novah"
+						}
 					}
 				},
 				{
 					"include": "#module_name"
+				},
+				{
+					"include": "#comments"
 				}
 			]
 		},
 		{
 			"name": "meta.foreign.getset.novah",
 			"begin": "^(\\s*)(foreign)\\s+(import)\\s+(get|set)\\b",
-			"end": "($|(?=//))",
+			"end": "^(?!\\1[ \\t]|[ \\t]*$)",
 			"beginCaptures": {
-        "2": {
-          "name": "keyword.other.novah"
-        },
-        "3": {
-          "name": "keyword.other.novah"
-        },
-        "4": {
-          "name": "keyword.other.novah"
-        }
-      },
+				"2": {
+					"name": "keyword.other.novah"
+				},
+				"3": {
+					"name": "keyword.other.novah"
+				},
+				"4": {
+					"name": "keyword.other.novah"
+				}
+			},
 			"patterns": [
 				{
 					"include": "#type_name"
@@ -67,8 +78,12 @@
 				{
 					"match": "\\b(as)\\s+([\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*)",
 					"captures": {
-						"1": { "name": "keyword.other.novah" },
-						"2": { "name": "entity.name.function.novah" }
+						"1": {
+							"name": "keyword.other.novah"
+						},
+						"2": {
+							"name": "entity.name.function.novah"
+						}
 					}
 				},
 				{
@@ -82,18 +97,18 @@
 		{
 			"name": "meta.foreign.typenew.novah",
 			"begin": "^(\\s*)(foreign)\\s+(import)\\s+(type|new)\\b",
-			"end": "($|(?=//))",
+			"end": "^(?!\\1[ \\t]|[ \\t]*$)",
 			"beginCaptures": {
-        "2": {
-          "name": "keyword.other.novah"
-        },
-        "3": {
-          "name": "keyword.other.novah"
-        },
-        "4": {
-          "name": "keyword.other.novah"
-        }
-      },
+				"2": {
+					"name": "keyword.other.novah"
+				},
+				"3": {
+					"name": "keyword.other.novah"
+				},
+				"4": {
+					"name": "keyword.other.novah"
+				}
+			},
 			"patterns": [
 				{
 					"include": "#type_name"
@@ -101,8 +116,12 @@
 				{
 					"match": "\\b(as)\\s+([\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*)",
 					"captures": {
-						"1": { "name": "keyword.other.novah" },
-						"2": { "name": "entity.name.function.novah" }
+						"1": {
+							"name": "keyword.other.novah"
+						},
+						"2": {
+							"name": "entity.name.function.novah"
+						}
 					}
 				},
 				{
@@ -113,15 +132,15 @@
 		{
 			"name": "meta.foreign.method.novah",
 			"begin": "^(\\s*)(foreign)\\s+(import)\\b",
-			"end": "($|(?=//))",
+			"end": "^(?!\\1[ \\t]|[ \\t]*$)",
 			"beginCaptures": {
-        "2": {
-          "name": "keyword.other.novah"
-        },
-        "3": {
-          "name": "keyword.other.novah"
-        }
-      },
+				"2": {
+					"name": "keyword.other.novah"
+				},
+				"3": {
+					"name": "keyword.other.novah"
+				}
+			},
 			"patterns": [
 				{
 					"include": "#type_name"
@@ -129,8 +148,12 @@
 				{
 					"match": "\\b(as)\\s+([\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*)",
 					"captures": {
-						"1": { "name": "keyword.other.novah" },
-						"2": { "name": "entity.name.function.novah" }
+						"1": {
+							"name": "keyword.other.novah"
+						},
+						"2": {
+							"name": "entity.name.function.novah"
+						}
 					}
 				},
 				{
@@ -139,26 +162,63 @@
 			]
 		},
 		{
+			"name": "meta.typealias.novah",
+			"begin": "^(\\s*)(typealias)\\s+([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*)",
+			"end": "^(?!\\1[ \\t]|[ \\t]*$)",
+			"beginCaptures": {
+				"2": {
+					"name": "storage.type.data.novah"
+				},
+				"3": {
+					"name": "entity.type-signature.novah",
+					"patterns": [
+						{
+							"include": "#type_signature"
+						}
+					]
+				}
+			},
+			"patterns": [
+				{
+					"match": "=",
+					"captures": {
+						"0": {
+							"name": "keyword.operator.assignment.novah"
+						}
+					}
+				},
+				{
+          "include": "#type_signature"
+        },
+				{
+          "include": "#record_types"
+        },
+				{
+          "include": "#comments"
+        }
+			]
+		},
+		{
 			"include": "#comments"
 		},
 		{
-      "name": "constant.language.boolean.novah",
-      "match": "\\b(true|false)\\b"
-    },
+			"name": "constant.language.boolean.novah",
+			"match": "\\b(true|false)\\b"
+		},
 		{
-      "name": "keyword.other.novah",
-      "match": "\\b(foreign|import|type|typealias|opaque)(?!')\\b"
-    }		
+			"name": "keyword.other.novah",
+			"match": "\\b(foreign|import|type|typealias|opaque)(?!')\\b"
+		}
 	],
 	"repository": {
 		"module_name": {
-      "patterns": [
-        {
-          "name": "support.other.module.novah",
-          "match": "(?:[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*(?:\\.[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)*\\.)*[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*(?:\\.[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)*\\.?"
-        }
-      ]
-    },
+			"patterns": [
+				{
+					"name": "support.other.module.novah",
+					"match": "(?:[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*(?:\\.[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)*\\.)*[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*(?:\\.[\\p{Ll}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)*\\.?"
+				}
+			]
+		},
 		"colon": {
 			"patterns": [
 				{
@@ -167,14 +227,14 @@
 				}
 			]
 		},
-		"type_name": {
-      "patterns": [
-        {
-          "name": "entity.name.type.novah",
-          "match": "\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)*"
-        }
-      ]
-    },
+		"data_ctor": {
+			"patterns": [
+				{
+					"name": "entity.name.tag.novah",
+					"match": "\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)*"
+				}
+			]
+		},
 		"keywords": {
 			"patterns": [
 				{
@@ -224,6 +284,101 @@
 				}
 			]
 		},
+		"type_name": {
+			"patterns": [
+				{
+					"name": "entity.name.type.novah",
+					"match": "\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)*"
+				}
+			]
+		},
+		"generic_type": {
+			"patterns": [
+				{
+					"name": "variable.other.generic-type.novah",
+					"match": "\\b(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*"
+				}
+			]
+		},
+		"type_signature": {
+			"patterns": [
+				{
+					"name": "keyword.other.arrow.novah",
+					"match": "->"
+				},
+				{
+					"include": "#generic_type"
+				},
+				{
+					"include": "#type_name"
+				},
+				{
+					"include": "#comments"
+				}
+			]
+		},
+		"record_types": {
+      "patterns": [
+        {
+          "name": "meta.type.record.novah",
+          "begin": "\\{",
+          "beginCaptures": {
+            "0": {
+              "name": "keyword.operator.type.record.begin.novah"
+            }
+          },
+          "end": "\\}",
+          "endCaptures": {
+            "0": {
+              "name": "keyword.operator.type.record.end.novah"
+            }
+          },
+          "patterns": [
+            {
+              "name": "punctuation.separator.comma.novah",
+              "match": ","
+            },
+            {
+              "include": "#record_field_declaration"
+            },
+            {
+              "include": "#comments"
+            }
+          ]
+        }
+      ]
+    },
+		"record_field_declaration": {
+      "patterns": [
+        {
+          "name": "meta.record-field.type-declaration.novah",
+          "begin": "([\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)\\s*(:)",
+          "end": "(?=([\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)\\s*(:)|})",
+          "contentName": "meta.type-signature.novah",
+          "beginCaptures": {
+            "1": {
+              "patterns": [
+                {
+                  "name": "entity.other.attribute-name.novah",
+                  "match": "(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*"
+                }
+              ]
+            },
+            "2": {
+              "name": "keyword.other.colon.novah"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#type_signature"
+            },
+            {
+              "include": "#record_types"
+            }
+          ]
+        }
+      ]
+    },
 		"module_imports": {
 			"patterns": [
 				{
