@@ -41,11 +41,11 @@
   },
   "Public": {
     "prefix": "pub",
-    "body": "pub\n${1:function} = ${2:body}"
+    "body": "pub\n${1:name} : ${2:type}\n${1:name} ${3:par} = ${4:body}"
   },
   "Public Instance": {
     "prefix": "pub instance",
-    "body": "pub instance\n${1:function} = ${2:body}"
+    "body": "pub instance\n${1:name} = ${2:body}"
   },
   "Documentantion": {
     "prefix": "doc",
