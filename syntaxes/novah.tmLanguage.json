@@ -380,6 +380,9 @@
       "include": "#function_type_declaration"
     },
 		{
+			"include": "#operator_type_declaration"
+		},
+		{
       "begin": "^(\\s*)(?:(:))",
       "beginCaptures": {
         "2": {
@@ -532,7 +535,7 @@
 			"patterns": [
 				{
 					"name": "entity.name.function.infix.novah",
-					"match": "(?:\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_\"']]+\\))"
+					"match": "(?:\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_\"]]+\\))"
 				}
 			]
 		},
@@ -541,6 +544,32 @@
         {
           "name": "meta.function.type-declaration.novah",
           "begin": "^(\\s*)([\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)\\s*(?:(:)(?!.*<-))",
+          "end": "^(?!\\1[ \\t]|[ \\t]*$)",
+          "contentName": "meta.type-signature.novah",
+          "beginCaptures": {
+            "2": {
+              "name": "entity.name.function.novah"
+            },
+            "3": {
+              "name": "keyword.other.colon.novah"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#colon"
+            },
+            {
+              "include": "#type_signature"
+            }
+          ]
+        }
+      ]
+    },
+		"operator_type_declaration": {
+      "patterns": [
+        {
+          "name": "meta.function.type-declaration.novah",
+          "begin": "^(\\s*)\\([$=<>\\|&+:*/%^.?!-]+\\)\\s+:",
           "end": "^(?!\\1[ \\t]|[ \\t]*$)",
           "contentName": "meta.type-signature.novah",
           "beginCaptures": {
