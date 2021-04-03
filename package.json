@@ -3,6 +3,11 @@
     "displayName": "Novah IDE",
     "description": "Integrated development environment for the Novah language",
     "version": "0.0.1",
+    "publisher": "rarestorm",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/stackoverflow/novah-ide"
+    },
     "engines": {
         "vscode": "^1.55.0"
     },
