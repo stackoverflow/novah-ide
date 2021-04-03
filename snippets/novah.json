@@ -46,5 +46,9 @@
   "Public Instance": {
     "prefix": "pub instance",
     "body": "pub instance\n${1:function} = ${2:body}"
+  },
+  "Documentantion": {
+    "prefix": "doc",
+    "body": "/**\n * ${1:doc}\n */"
   }
 }
