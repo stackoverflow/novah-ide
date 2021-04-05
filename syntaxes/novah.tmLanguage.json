@@ -313,7 +313,7 @@
 		},
 		{
       "name": "keyword.control.novah",
-      "match": "\\b(do|if|then|else|case|of|let|in)(?!')\\b"
+      "match": "\\b(do|if|then|else|case|of|let|in|throw|try|catch|finally|while)(?!')\\b"
     },
 		{
       "name": "constant.numeric.hex.novah",
@@ -437,18 +437,6 @@
 				{
 					"name": "entity.name.tag.novah",
 					"match": "\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)*"
-				}
-			]
-		},
-		"keywords": {
-			"patterns": [
-				{
-					"name": "keyword.control.novah",
-					"match": "\\b(if|then|else|case|of)\\b"
-				},
-				{
-					"name": "keyword.other.novah",
-					"match": "\\b(foreign)\\b"
 				}
 			]
 		},

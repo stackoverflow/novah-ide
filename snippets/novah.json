@@ -50,5 +50,13 @@
   "Documentantion": {
     "prefix": "doc",
     "body": "/**\n * ${1:doc}\n */"
+  },
+  "While": {
+    "prefix": "while",
+    "body": "while ${1:pred} then\n  ${2:body}"
+  },
+  "Try": {
+    "prefix": "try",
+    "body": "try\n  ${1:body}\ncatch\n  :? ${2:Type} -> ${3:handler}"
   }
 }
