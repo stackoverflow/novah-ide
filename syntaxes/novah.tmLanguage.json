@@ -309,7 +309,7 @@
 		},
 		{
 			"name": "keyword.other.novah",
-			"match": "\\b(foreign|import|type|typealias|opaque|pub\\+|pub|instance)(?!')\\b"
+			"match": "\\b(foreign|import|type|typealias|opaque|pub\\+|pub|instance|as)(?!')\\b"
 		},
 		{
       "name": "keyword.control.novah",
