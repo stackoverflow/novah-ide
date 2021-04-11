@@ -308,8 +308,12 @@
 			"match": "\\b(true|false)\\b"
 		},
 		{
+			"name": "keyword.other.pubplus.novah",
+			"match": "pub\\+"
+		},
+		{
 			"name": "keyword.other.novah",
-			"match": "\\b(foreign|import|type|typealias|opaque|pub\\+|pub|instance|as)(?!')\\b"
+			"match": "\\b(foreign|import|type|typealias|opaque|pub|instance|as)(?!')\\b"
 		},
 		{
       "name": "keyword.control.novah",
@@ -383,20 +387,6 @@
 			"include": "#operator_type_declaration"
 		},
 		{
-      "begin": "^(\\s*)(?:(:))",
-      "beginCaptures": {
-        "2": {
-          "name": "keyword.other.colon.novah"
-        }
-      },
-      "end": "^(?!\\1[ \\t]*|[ \\t]*$)",
-      "patterns": [
-        {
-          "include": "#type_signature"
-        }
-      ]
-    },
-		{
       "include": "#data_ctor"
     },
 		{
@@ -408,7 +398,7 @@
     },
 		{
       "name": "keyword.operator.novah",
-      "match": "[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_\"]]+"
+      "match": "(?<!pub)[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_\"]]+"
     },
 		{
       "name": "punctuation.separator.comma.novah",
