@@ -1,0 +1,21 @@
+{
+	"name": "novah-lsp-client",
+	"description": "Novah LSP client",
+	"author": "Islon Scherer",
+	"version": "0.0.1",
+	"publisher": "rarestorm",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/stackoverflow/novah-ide"
+	},
+	"engines": {
+		"vscode": "^1.55.0"
+	},
+	"dependencies": {
+		"vscode-languageclient": "^7.0.0"
+	},
+	"devDependencies": {
+		"@types/node": "^14.14.31",
+		"@types/vscode": "^1.58.0"
+	}
+}

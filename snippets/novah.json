@@ -3,10 +3,6 @@
     "prefix": "case",
     "body": "case ${1:expression} of\n  ${2:pattern} -> ${3:expression}"
   },
-  "Do": {
-    "prefix": "do",
-    "body": "do\n  "
-  },
   "Foreign": {
     "prefix": "foreign",
     "body": "foreign import"
@@ -49,6 +45,10 @@
   },
   "Documentantion": {
     "prefix": "doc",
+    "body": "/**\n * ${1:doc}\n */"
+  },
+  "Documentantion2": {
+    "prefix": "/**",
     "body": "/**\n * ${1:doc}\n */"
   },
   "While": {

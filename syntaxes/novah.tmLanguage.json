@@ -308,6 +308,14 @@
 			"match": "\\b(true|false)\\b"
 		},
 		{
+			"name": "constant.language.null.novah",
+			"match": "\\b(null)\\b"
+		},
+		{
+			"name": "keyword.control.letbang.novah",
+			"match": "let!"
+		},
+		{
 			"name": "keyword.other.pubplus.novah",
 			"match": "pub\\+"
 		},
@@ -521,7 +529,7 @@
       "patterns": [
         {
           "name": "meta.function.type-declaration.novah",
-          "begin": "^(\\s*)([\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)\\s*(?:(:)(?!.*<-))",
+          "begin": "^(\\s*)([\\p{Ll}_\\p{Lu}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)\\s*(?:(:)(?!.*<-))",
           "end": "^(?!\\1[ \\t]|[ \\t]*$)",
           "contentName": "meta.type-signature.novah",
           "beginCaptures": {

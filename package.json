@@ -3,6 +3,7 @@
     "displayName": "Novah IDE",
     "description": "Integrated development environment for the Novah language",
     "version": "0.0.1",
+    "author": "Islon Scherer",
     "publisher": "rarestorm",
     "repository": {
         "type": "git",
@@ -14,23 +15,55 @@
     "categories": [
         "Programming Languages"
     ],
+    "activationEvents": [
+		"onLanguage:novah"
+	],
+    "main": "./client/out/extension",
     "contributes": {
-        "languages": [{
-            "id": "novah",
-            "aliases": ["Novah", "novah"],
-            "extensions": [".novah"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "novah",
-            "scopeName": "source.novah",
-            "path": "./syntaxes/novah.tmLanguage.json"
-        }],
+        "languages": [
+            {
+                "id": "novah",
+                "aliases": [
+                    "Novah",
+                    "novah"
+                ],
+                "extensions": [
+                    ".novah"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "novah",
+                "scopeName": "source.novah",
+                "path": "./syntaxes/novah.tmLanguage.json"
+            }
+        ],
         "snippets": [
             {
                 "language": "novah",
                 "path": "./snippets/novah.json"
             }
-        ]
+        ],
+        "configuration": {
+            "title": "Novah IDE",
+            "properties": {
+                "novah.compilerPath": {
+                    "type": "string",
+                    "default": null,
+                    "description": "Path to the Novah compiler"
+                }
+            }
+        }
+    },
+    "scripts": {
+        "compile": "tsc -b",
+		"watch": "tsc -b -w",
+        "postinstall": "cd client && npm install && cd .."
+    },
+    "devDependencies": {
+        "@types/node": "^14.14.31",
+        "typescript": "^4.3.5"
     }
 }
