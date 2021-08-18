@@ -2,6 +2,7 @@
 import * as path from 'path';
 import { ExtensionContext, workspace } from 'vscode';
 import * as vscode from 'vscode';
+import { existsSync } from 'fs';
 
 import {
 	LanguageClient,
@@ -19,13 +20,12 @@ export function activate(context: ExtensionContext) {
 
 	// Get the java home from the process environment.
 	const { JAVA_HOME } = process.env;
+	const { PATH } = process.env;
+	const executable = JAVA_HOME ? path.join(JAVA_HOME, 'bin', 'java') : checkPathForJava(PATH);
 
-	console.log(`Using java from JAVA_HOME: ${JAVA_HOME}`);
-	// If java home is available continue.
-	if (JAVA_HOME) {
-		// Java execution path.
-		let executable: string = path.join(JAVA_HOME, 'bin', 'java');
-
+	console.log(`Using java from: ${executable}`);
+	// If java is available continue.
+	if (executable) {
 		checkFileExists(compilerPath, () => {
 			let classPath = compilerPath;
 			console.log(`Using class path: ${classPath}`);
@@ -57,7 +57,7 @@ export function activate(context: ExtensionContext) {
 			client.start()
 		});
 	} else {
-		const msg = 'Could not find the JAVA_HOME environment variable. Make sure you have Java installed and JAVA_HOME set in your path.';
+		const msg = 'Could not find the JAVA_HOME environment variable or the java executable in path. Make sure you have Java installed.';
 		vscode.window.showErrorMessage(msg, {modal: false});
 	}
 }
@@ -85,10 +85,30 @@ function registerNovahUri(context: ExtensionContext) {
 	context.subscriptions.push(vscode.workspace.registerTextDocumentContentProvider(scheme, provider))
 }
 
+function checkPathForJava(envPath: string): string | null {
+	const sep = process.platform === 'win32' ? ';' : ":";
+	const paths = envPath.split(sep);
+	let java: string | null = null;
+
+	for (const spath of paths) {
+		const jpath = path.join(spath, 'java');
+		if (existsSync(jpath)) {
+			java = jpath;
+			break;
+		}
+	}
+	return java;
+}
+
 function checkFileExists(fileName: string, onSuccess: () => void) {
+	const msg = 'Could not find Novah compiler. Make sure you configure it properly in the settings (Compiler Path).';
+
+	if (!fileName) {
+		vscode.window.showErrorMessage(msg, {modal: false});
+		return;
+	}
 	const file = vscode.Uri.file(fileName);
 	workspace.fs.stat(file).then((_) => onSuccess(), (err) => {
-		const msg = 'Could not find Novah compiler. Make sure you configure it properly in the settings (Compiler Path).';
 		vscode.window.showErrorMessage(msg, {modal: false});
 	});
 }

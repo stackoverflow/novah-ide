@@ -12,12 +12,14 @@ IDE for the [Novah](https://github.com/stackoverflow/novah) programming language
 - Hover
 - Formatting
 - Folding
+- Find all references
+- Rename symbol (variable, declaration, type or constructor)
 
 More to come.
 
 ## Requirements
 
-- Java installed and JAVA_HOME set.
+- Java installed and in the path or JAVA_HOME set.
 - Novah compiler jar.
 
 ## Release Notes
