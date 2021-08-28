@@ -5,7 +5,7 @@
   },
   "Foreign": {
     "prefix": "foreign",
-    "body": "foreign import"
+    "body": "foreign import ${1:class}"
   },
   "If": {
     "prefix": "if",
