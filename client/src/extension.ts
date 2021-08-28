@@ -18,6 +18,8 @@ export function activate(context: ExtensionContext) {
 
 	const compilerPath: string | undefined = workspace.getConfiguration().get('novah.compilerPath');
 
+	addTasks();
+
 	// Get the java home from the process environment.
 	const { JAVA_HOME } = process.env;
 	const { PATH } = process.env;
@@ -58,7 +60,7 @@ export function activate(context: ExtensionContext) {
 		});
 	} else {
 		const msg = 'Could not find the JAVA_HOME environment variable or the java executable in path. Make sure you have Java installed.';
-		vscode.window.showErrorMessage(msg, {modal: false});
+		vscode.window.showErrorMessage(msg, { modal: false });
 	}
 }
 
@@ -69,6 +71,29 @@ export function deactivate(): Thenable<void> | undefined {
 	return client.stop();
 }
 
+function addTasks() {
+	const type = "novah";
+	vscode.tasks.registerTaskProvider(type, {
+		provideTasks(token?: vscode.CancellationToken) {
+			const build = new vscode.ShellExecution("novah deps build -a test");
+			const run = new vscode.ShellExecution("novah run");
+			const test = new vscode.ShellExecution("novah run -a test");
+			const matcher = "novah error";
+			return [
+				new vscode.Task({ type: type, task: "build" }, vscode.TaskScope.Workspace,
+					"Build", "novah-ide", build, matcher),
+				new vscode.Task({ type: type, task: "run" }, vscode.TaskScope.Workspace,
+					"Run", "novah-ide", run, matcher),
+				new vscode.Task({ type: type, task: "test" }, vscode.TaskScope.Workspace,
+					"test", "novah-ide", test, matcher),
+			];
+		},
+		resolveTask(task: vscode.Task, token?: vscode.CancellationToken) {
+			return task;
+		}
+	});
+}
+
 function registerNovahUri(context: ExtensionContext) {
 	const scheme = 'novah'
 	const provider = new class implements vscode.TextDocumentContentProvider {
@@ -77,7 +102,7 @@ function registerNovahUri(context: ExtensionContext) {
 		onDidChange = this.onDidChangeEmitter.event;
 
 		provideTextDocumentContent(uri: vscode.Uri): vscode.ProviderResult<string> {
-			let newUri = uri.with({scheme: 'file'})
+			let newUri = uri.with({ scheme: 'file' })
 			return workspace.openTextDocument(newUri).then(document => document.getText())
 		}
 	}
@@ -104,11 +129,11 @@ function checkFileExists(fileName: string, onSuccess: () => void) {
 	const msg = 'Could not find Novah compiler. Make sure you configure it properly in the settings (Compiler Path).';
 
 	if (!fileName) {
-		vscode.window.showErrorMessage(msg, {modal: false});
+		vscode.window.showErrorMessage(msg, { modal: false });
 		return;
 	}
 	const file = vscode.Uri.file(fileName);
 	workspace.fs.stat(file).then((_) => onSuccess(), (err) => {
-		vscode.window.showErrorMessage(msg, {modal: false});
+		vscode.window.showErrorMessage(msg, { modal: false });
 	});
 }

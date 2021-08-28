@@ -55,7 +55,41 @@
                     "description": "Path to the Novah compiler"
                 }
             }
-        }
+        },
+        "taskDefinitions": [
+            {
+                "type": "novah",
+                "required": ["task"],
+                "properties": {
+                    "task": {
+                        "type": "string",
+                        "description": "The task to run",
+                        "default": "build",
+                        "oneOf": [{"type" : "string", "enum": ["build", "run", "test"]}]
+                    }
+                }
+            }
+        ],
+        "problemMatchers": [
+            {
+                "applyTo": "allDocuments",
+                "label": "novah error",
+                "name": "novah error",
+                "severity": "error",
+                "source": "novah compiler",
+                "pattern":[
+                    {
+                        "regexp": "^module [\\w+\\.?]+\\nat (.+?(?=:)):(\\d+):(\\d+) - (\\d+):(\\d+)",
+                        "file": 1,
+                        "line": 2,
+                        "column": 3,
+                        "endLine": 4,
+                        "endColumn": 5,
+                        "message": 1
+                    }
+                ]
+            }
+        ]
     },
     "scripts": {
         "compile": "tsc -b",
