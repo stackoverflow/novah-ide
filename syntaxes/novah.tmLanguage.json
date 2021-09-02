@@ -239,8 +239,8 @@
 			"match": "\\b(null)\\b"
 		},
 		{
-			"name": "keyword.control.letbang.novah",
-			"match": "let!"
+			"name": "keyword.control.bangs.novah",
+			"match": "let!|if!|do!"
 		},
 		{
 			"name": "keyword.other.pubplus.novah",
@@ -252,7 +252,7 @@
 		},
 		{
       "name": "keyword.control.novah",
-      "match": "\\b(do|if|then|else|case|of|let|in|throw|try|catch|finally|while)(?!')\\b"
+      "match": "\\b(do|if|then|else|case|of|let|in|throw|try|catch|finally|while|return)(?!')\\b"
     },
 		{
       "name": "constant.numeric.hex.novah",
