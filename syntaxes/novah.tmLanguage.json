@@ -240,7 +240,7 @@
 		},
 		{
 			"name": "keyword.control.bangs.novah",
-			"match": "let!|if!|do!"
+			"match": "let!|do!"
 		},
 		{
 			"name": "keyword.other.pubplus.novah",
