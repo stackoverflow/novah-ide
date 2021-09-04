@@ -252,7 +252,7 @@
 		},
 		{
       "name": "keyword.control.novah",
-      "match": "\\b(do|if|then|else|case|of|let|in|throw|try|catch|finally|while|return)(?!')\\b"
+      "match": "\\b(do|if|then|else|case|of|let|in|throw|try|catch|finally|while|return|yield|for)(?!')\\b"
     },
 		{
       "name": "constant.numeric.hex.novah",
