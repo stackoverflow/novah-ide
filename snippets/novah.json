@@ -58,5 +58,21 @@
   "Try": {
     "prefix": "try",
     "body": "try\n  ${1:body}\ncatch\n  :? ${2:Type} -> ${3:handler}"
+  },
+  "Return": {
+    "prefix": "return",
+    "body": "return ${1:value}"
+  },
+  "Yield": {
+    "prefix": "yield",
+    "body": "yield ${1:value}"
+  },
+  "For": {
+    "prefix": "for",
+    "body": "for ${1:pattern} in ${2:exp} do\n  ${3:yield}"
+  },
+  "ForYield": {
+    "prefix": "foryield",
+    "body": "for ${1:pattern} in ${2:exp} do yield ${1:pattern}"
   }
 }
