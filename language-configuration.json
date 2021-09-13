@@ -20,8 +20,7 @@
         ["`", "`"],
         ["\"", "\""],
         ["'", "'"],
-        ["\"\"\"", "\"\"\""],
-        ["/**", "*/"]
+        ["\"\"\"", "\"\"\""]
     ],
     // symbols that can be used to surround a selection
     "surroundingPairs": [
@@ -33,5 +32,20 @@
         ["\"", "\""],
         ["'", "'"],
         ["\"\"\"", "\"\"\""]
+    ],
+    "onEnterRules": [
+        {
+            "beforeText": "^.*(?:=)\\s*",
+            "action": {
+                "indent": "indent"
+            }
+        },
+        {
+            "beforeText": "^\\s+\\*.*$",
+            "action": {
+                "indent": "none",
+                "appendText": "* "
+            }
+        }
     ]
 }
