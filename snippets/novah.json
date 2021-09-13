@@ -35,13 +35,17 @@
     "prefix": "type",
     "body": "type ${1:Name} = ${2:Type}"
   },
+  "Definition": {
+    "prefix": "def",
+    "body": "${1:name} : ${2:type}\n${1:name} ${3:par} = ${4:todo \"\"}"
+  },
   "Public": {
     "prefix": "pub",
-    "body": "pub\n${1:name} : ${2:type}\n${1:name} ${3:par} = ${4:body}"
+    "body": "pub\n${1:name} : ${2:type}\n${1:name} ${3:par} = ${4:todo \"\"}"
   },
   "Public Instance": {
     "prefix": "pub instance",
-    "body": "pub instance\n${1:name} : ${2:type}\n${1:name} ${3:par} = ${4:body}"
+    "body": "pub instance\n${1:name} : ${2:type}\n${1:name} ${3:par} = ${4:todo \"\"}"
   },
   "Documentantion": {
     "prefix": "doc",
