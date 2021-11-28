@@ -41,11 +41,11 @@
   },
   "Public": {
     "prefix": "pub",
-    "body": "pub\n${1:name} : ${2:type}\n${1:name} ${3:par} = ${4:todo \"\"}"
+    "body": "pub\n${1:name} : ${2:type}\n${1:name} ${3:par} =\n  ${4:todo \"\"}"
   },
   "Public Instance": {
     "prefix": "pub instance",
-    "body": "pub instance\n${1:name} : ${2:type}\n${1:name} ${3:par} = ${4:todo \"\"}"
+    "body": "pub instance\n${1:name} : ${2:type}\n${1:name} ${3:par} =\n  ${4:todo \"\"}"
   },
   "Documentantion": {
     "prefix": "doc",
