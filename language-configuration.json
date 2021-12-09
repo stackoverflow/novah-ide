@@ -35,7 +35,7 @@
     ],
     "onEnterRules": [
         {
-            "beforeText": "^.*(?:=|do|->)\\s*$",
+            "beforeText": "^.*(?:=|do|of|->)\\s*$",
             "action": {
                 "indent": "indent"
             }
