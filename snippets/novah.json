@@ -57,7 +57,7 @@
   },
   "While": {
     "prefix": "while",
-    "body": "while ${1:pred} then\n  ${2:body}"
+    "body": "while ${1:pred} do\n  ${2:body}"
   },
   "Try": {
     "prefix": "try",
