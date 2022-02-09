@@ -456,7 +456,7 @@
       "patterns": [
         {
           "name": "meta.function.type-declaration.novah",
-          "begin": "^(\\s*)([\\p{Ll}_\\p{Lu}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)\\s*(?:(:)(?!.*<-))",
+          "begin": "^(\\s*)([\\p{Ll}_\\p{Lu}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\\?!]*)\\s*(?:(:)(?!.*<-))",
           "end": "^(?!\\1[ \\t]|[ \\t]*$)",
           "contentName": "meta.type-signature.novah",
           "beginCaptures": {
@@ -611,7 +611,7 @@
 						},
 						{
 							"name": "entity.name.function.novah",
-							"match": "\\b(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*"
+							"match": "\\b(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}]*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\\?!]*"
 						},
 						{
 							"include": "#type_name"

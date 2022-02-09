@@ -19,6 +19,7 @@ export function activate(context: ExtensionContext) {
 	const compilerPath: string | undefined = workspace.getConfiguration().get('novah.compilerPath');
 
 	addTasks();
+	addCommands();
 
 	// Get the java home from the process environment.
 	const { JAVA_HOME } = process.env;
@@ -40,7 +41,7 @@ export function activate(context: ExtensionContext) {
 			let serverOptions: ServerOptions = {
 				run: {
 					command: executable,
-					args: [...args, "ide"],
+					args: [...args, "ide", "--verbose"],
 					options: {}
 				},
 				debug: {
@@ -55,6 +56,12 @@ export function activate(context: ExtensionContext) {
 			};
 
 			client = new LanguageClient('Novah', 'Novah Language Server', serverOptions, clientOptions);
+
+			// client.onReady().then(() => {
+			// 	client.onNotification('custom/setMain', (line : number) => {
+			// 		vscode.window.showInformationMessage(`got setMain notification for line ${line}`);
+			// 	})
+			// });
 
 			client.start()
 		});
@@ -91,6 +98,15 @@ function addTasks() {
 		resolveTask(task: vscode.Task, token?: vscode.CancellationToken) {
 			return task;
 		}
+	});
+}
+
+function addCommands() {
+	vscode.commands.registerCommand('addTypeSignature', (line : number, col : number, type : string) => {
+		vscode.window.activeTextEditor.edit((e) => {
+			const text = line === 0 ? type + '\n' : '\n' + type + '\n'
+			e.insert(new vscode.Position(line, col), text);
+		})
 	});
 }
 

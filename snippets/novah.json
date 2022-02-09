@@ -78,5 +78,9 @@
   "ForYield": {
     "prefix": "foryield",
     "body": "for ${1:pattern} in ${2:exp} do yield ${1:pattern}"
+  },
+  "Main": {
+    "prefix": "main",
+    "body": "pub\nmain : Array String -> Unit\nmain _ =\n  ${1:body}"
   }
 }
