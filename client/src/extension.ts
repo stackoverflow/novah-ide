@@ -108,6 +108,15 @@ function addCommands() {
 			e.insert(new vscode.Position(line, col), text);
 		})
 	});
+
+	let term = vscode.window.createTerminal('Ext Terminal Novah');
+	vscode.commands.registerCommand('runMain', (module : string) => {
+		if (term.exitStatus) {
+			term = vscode.window.createTerminal('Ext Terminal Novah');
+		}
+		term.show(true);
+		term.sendText(`novah run -b -m ${module}`);
+	});
 }
 
 function registerNovahUri(context: ExtensionContext) {
