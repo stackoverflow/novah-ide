@@ -16,59 +16,39 @@ export function activate(context: ExtensionContext) {
 	console.log('Starting Novah IDE...');
 	registerNovahUri(context);
 
-	const compilerPath: string | undefined = workspace.getConfiguration().get('novah.compilerPath');
+	const novahPath: string | undefined = workspace.getConfiguration().get('novah.path');
 
 	addTasks();
 	addCommands();
 
-	// Get the java home from the process environment.
-	const { JAVA_HOME } = process.env;
-	const { PATH } = process.env;
-	const executable = JAVA_HOME ? path.join(JAVA_HOME, 'bin', 'java') : checkPathForJava(PATH);
+	checkFileExists(novahPath, () => {
+		let serverOptions: ServerOptions = {
+			run: {
+				command: novahPath,
+				args: ["ide", "--verbose"],
+				options: {}
+			},
+			debug: {
+				command: novahPath,
+				args: ["ide", "--verbose"],
+				options: {}
+			}
+		};
 
-	console.log(`Using java from: ${executable}`);
-	// If java is available continue.
-	if (executable) {
-		checkFileExists(compilerPath, () => {
-			let classPath = compilerPath;
-			console.log(`Using class path: ${classPath}`);
+		let clientOptions: LanguageClientOptions = {
+			documentSelector: [{ scheme: 'file', language: 'novah' }]
+		};
 
-			const args: string[] = ['-jar', classPath];
+		client = new LanguageClient('Novah', 'Novah Language Server', serverOptions, clientOptions);
 
-			// Set the server options 
-			// -- java execution path
-			// -- argument to be pass when executing the java command
-			let serverOptions: ServerOptions = {
-				run: {
-					command: executable,
-					args: [...args, "ide", "--verbose"],
-					options: {}
-				},
-				debug: {
-					command: executable,
-					args: [...args, "ide", "--verbose"],
-					options: {}
-				}
-			};
+		// client.onReady().then(() => {
+		// 	client.onNotification('custom/setMain', (line : number) => {
+		// 		vscode.window.showInformationMessage(`got setMain notification for line ${line}`);
+		// 	})
+		// });
 
-			let clientOptions: LanguageClientOptions = {
-				documentSelector: [{ scheme: 'file', language: 'novah' }]
-			};
-
-			client = new LanguageClient('Novah', 'Novah Language Server', serverOptions, clientOptions);
-
-			// client.onReady().then(() => {
-			// 	client.onNotification('custom/setMain', (line : number) => {
-			// 		vscode.window.showInformationMessage(`got setMain notification for line ${line}`);
-			// 	})
-			// });
-
-			client.start()
-		});
-	} else {
-		const msg = 'Could not find the JAVA_HOME environment variable or the java executable in path. Make sure you have Java installed.';
-		vscode.window.showErrorMessage(msg, { modal: false });
-	}
+		client.start()
+	});
 }
 
 export function deactivate(): Thenable<void> | undefined {
@@ -104,15 +84,21 @@ function addTasks() {
 function addCommands() {
 	vscode.commands.registerCommand('addTypeSignature', (line : number, col : number, type : string) => {
 		vscode.window.activeTextEditor.edit((e) => {
-			const text = line === 0 ? type + '\n' : '\n' + type + '\n'
+			const text = col === 0 ? type + '\n' : '\n' + type + '\n'
 			e.insert(new vscode.Position(line, col), text);
 		})
 	});
 
-	let term = vscode.window.createTerminal('Ext Terminal Novah');
+	const name = 'Ext Terminal Novah'
+	let terms = vscode.window.terminals
+	let term: vscode.Terminal = null;
+	terms.forEach(t => {
+		if (!t.exitStatus && t.name == name) term = t
+	});
+	if (term === null) term = vscode.window.createTerminal(name);
 	vscode.commands.registerCommand('runMain', (module : string) => {
 		if (term.exitStatus) {
-			term = vscode.window.createTerminal('Ext Terminal Novah');
+			term = vscode.window.createTerminal(name);
 		}
 		term.show(true);
 		term.sendText(`novah run -b -m ${module}`);
@@ -135,23 +121,8 @@ function registerNovahUri(context: ExtensionContext) {
 	context.subscriptions.push(vscode.workspace.registerTextDocumentContentProvider(scheme, provider))
 }
 
-function checkPathForJava(envPath: string): string | null {
-	const sep = process.platform === 'win32' ? ';' : ":";
-	const paths = envPath.split(sep);
-	let java: string | null = null;
-
-	for (const spath of paths) {
-		const jpath = path.join(spath, 'java');
-		if (existsSync(jpath)) {
-			java = jpath;
-			break;
-		}
-	}
-	return java;
-}
-
 function checkFileExists(fileName: string, onSuccess: () => void) {
-	const msg = 'Could not find Novah compiler. Make sure you configure it properly in the settings (Compiler Path).';
+	const msg = 'Could not find Novah executable. Make sure you configure it properly in the settings (Novah Path).';
 
 	if (!fileName) {
 		vscode.window.showErrorMessage(msg, { modal: false });

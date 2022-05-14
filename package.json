@@ -49,10 +49,10 @@
         "configuration": {
             "title": "Novah IDE",
             "properties": {
-                "novah.compilerPath": {
+                "novah.path": {
                     "type": "string",
                     "default": null,
-                    "description": "Path to the Novah compiler"
+                    "description": "Path to Novah executable"
                 }
             }
         },
@@ -107,7 +107,7 @@
         "watch": "tsc -b -w",
         "postinstall": "cd client && npm install && cd ..",
         "package": "vsce package",
-        "install": "code --install-extension novah-ide-0.0.1.vsix"
+        "install-ext": "code --install-extension novah-ide-0.0.1.vsix"
     },
     "devDependencies": {
         "@types/node": "^14.14.31",
