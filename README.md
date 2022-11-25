@@ -24,7 +24,9 @@ More to come.
 
 ## Release Notes
 
--
+### 0.0.2
+
+- Added syntax highlight for bigints, bigdecimal and `!in`
 
 ### 0.0.1
 
