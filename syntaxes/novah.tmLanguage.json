@@ -255,20 +255,24 @@
       "match": "\\b(do|if|then|else|case|of|let|in|throw|try|catch|finally|while|return|yield|for)(?!')\\b"
     },
 		{
+			"name": "keyword.control.notIn",
+			"match": "\\!in"
+		},
+		{
       "name": "constant.numeric.hex.novah",
-      "match": "\\b(?<!\\$)0(x|X)[0-9a-fA-F]+[L]?\\b(?!\\$)"
+      "match": "\\b(?<!\\$)0(x|X)[0-9a-fA-F|_]+[L|N]?\\b(?!\\$)"
     },
 		{
       "name": "constant.numeric.bin.novah",
-      "match": "\\b(?<!\\$)0(b|B)[0-1]+[L]?\\b(?!\\$)"
+      "match": "\\b(?<!\\$)0(b|B)[0-1|_]+[L|N]?\\b(?!\\$)"
     },
 		{
       "name": "constant.numeric.int.novah",
-      "match": "\\b(?<!\\$)[0-9]+[L]?\\b(?!\\$)"
+      "match": "\\b(?<!\\$)[0-9|_]+[L|N|M]?\\b(?!\\$)"
     },
 		{
       "name": "constant.numeric.novah",
-      "match": "\\b[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?[F]?\\b"
+      "match": "\\b[-+]?[0-9|_]*\\.?[0-9|_]+([eE][-+]?[0-9|_]+)?[F|M]?\\b"
     },
 		{
       "name": "string.quoted.triple.novah",

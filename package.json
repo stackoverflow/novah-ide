@@ -2,7 +2,7 @@
     "name": "novah-ide",
     "displayName": "Novah IDE",
     "description": "Integrated development environment for the Novah language",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "author": "Islon Scherer",
     "publisher": "rarestorm",
     "repository": {
@@ -30,7 +30,11 @@
                 "extensions": [
                     ".novah"
                 ],
-                "configuration": "./language-configuration.json"
+                "configuration": "./language-configuration.json",
+                "icon": {
+                    "light": "./icons/novah-light.png",
+                    "dark": "./icons/novah.png"
+                }
             }
         ],
         "grammars": [
@@ -107,7 +111,7 @@
         "watch": "tsc -b -w",
         "postinstall": "cd client && npm install && cd ..",
         "package": "vsce package",
-        "install-ext": "code --install-extension novah-ide-0.0.1.vsix"
+        "install-ext": "code --install-extension novah-ide-0.0.2.vsix"
     },
     "devDependencies": {
         "@types/node": "^14.14.31",
